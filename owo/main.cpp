@@ -188,10 +188,11 @@ void aggiornamentoDurability(Gemma &gemma){
 void usaGemme(Gemma gemma){
     disponibilita_gemma_maggiore(gemma);
 }
-void assegnazioneid(Gemma &gemma,int inizio){
-    for(int id=inizio;id<massimo;++id){
+void assegnazioneid(Gemma &gemma,int id){
+    for(int i=0;i<massimo;++i){
         gemma.id.push_back(std::to_string(id));
         std::cout<<id<<std::endl;
+        ++id;
     }
 }
 int main() {
