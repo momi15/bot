@@ -199,7 +199,7 @@ void conto_alla_rovescia(int inizio){
     for(int i=inizio;i>0;--i){
         std::cout<<"tra "<<i<<"inizia il programma";
         ritardo(1);
-        std::cout<<"\033[2K";
+        std::cout<<"\033[1A\033[2K";
     }
 }
 int main() {
