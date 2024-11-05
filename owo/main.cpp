@@ -46,18 +46,25 @@ void disponibilita_gemma_maggiore(Gemma &gemma) {
     std::string gemmaDaUsare = controlloNelMagazino(gemma);
     if (gemmaDaUsare == "fabled") {
         simulaTastiera("owo use " + gemma.string_fabled);
+        --gemma.fabled;
     } else if (gemmaDaUsare == "legendary") {
         simulaTastiera("owo use " + gemma.string_legendary);
+        --gemma.legendary;
     } else if (gemmaDaUsare == "mythical") {
         simulaTastiera("owo use " + gemma.string_mythical);
+        --gemma.mythical;
     } else if (gemmaDaUsare == "epic") {
         simulaTastiera("owo use " + gemma.string_epic);
+        --gemma.epic;
     } else if (gemmaDaUsare == "rare") {
         simulaTastiera("owo use " + gemma.string_rare);
+        --gemma.rare;
     } else if (gemmaDaUsare == "uncommon") {
         simulaTastiera("owo use " + gemma.string_uncommon);
+        --gemma.uncommon;
     } else if (gemmaDaUsare == "common") {
         simulaTastiera("owo use " + gemma.string_common);
+        --gemma.common;
     }
 }
 void ridimensionaGemme(Gemma &gemma) {
@@ -97,6 +104,8 @@ void ridimensionaGemme(Gemma &gemma) {
         if (gemma.durability_common <= 0) {
             disponibilita_gemma_maggiore(gemma);
         }
+    }else {
+        disponibilita_gemma_maggiore(gemma);
     }
 }
 void decrementoGemme(Gemma &diamante,Gemma&cerchio,Gemma&cuore){
@@ -134,6 +143,8 @@ void decrementoGemme(Gemma &diamante,Gemma&cerchio,Gemma&cuore){
         --diamante.durability_common;
         ridimensionaGemme(cuore);
         ridimensionaGemme(cerchio);
+    }else {
+        disponibilita_gemma_maggiore(diamante);
     }
 }
 void aggiornamentoDurability(Gemma &gemma){
