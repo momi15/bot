@@ -136,6 +136,15 @@ void decrementoGemme(Gemma &diamante,Gemma&cerchio,Gemma&cuore){
         ridimensionaGemme(cerchio);
     }
 }
+void aggiornamentoDurability(Gemma &gemma){
+    if(gemma.fabled==0) gemma.durability_fabled=0;
+    if(gemma.legendary==0) gemma.durability_legendary=0;
+    if(gemma.epic==0) gemma.durability_epic=0;
+    if(gemma.mythical==0) gemma.durability_mythical=0;
+    if(gemma.rare==0) gemma.durability_rare=0;
+    if(gemma.uncommon==0) gemma.durability_uncommon=0;
+    if(gemma.common==0) gemma.durability_common=0;
+}
 int main() {
     //imposta il seed in base al tempo in modo che siano numeri casuali
     srand(time(0));
@@ -217,6 +226,7 @@ int main() {
     cuore.durability_legendary=800;
     cuore.durability_fabled=1000;
     #pragma endregion assegnazione_durabilita
+    
     //definizioni quantita diamanti
     diamante.common=0;
     diamante.uncommon=0;
@@ -243,6 +253,11 @@ int main() {
     cuore.mythical=0;
     cuore.legendary=0;
     cuore.fabled=0;
+
+    //per fare in modo che le durabilità delle gemme che non abbiamo siano a 0
+    aggiornamentoDurability(diamante);
+    aggiornamentoDurability(cuore);
+    aggiornamentoDurability(cerchio);
 
     //variabile per il conteggio
     int conteggio=0;
