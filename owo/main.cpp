@@ -46,24 +46,38 @@ void disponibilita_gemma_maggiore(Gemma &gemma) {
     std::string gemmaDaUsare = controlloNelMagazino(gemma);
     if (gemmaDaUsare == "fabled") {
         simulaTastiera("owo use " + gemma.string_fabled);
+        keybd_event(VK_RETURN, 0, 0, 0);
+        ritardo(10);
         --gemma.fabled;
     } else if (gemmaDaUsare == "legendary") {
         simulaTastiera("owo use " + gemma.string_legendary);
+        keybd_event(VK_RETURN, 0, 0, 0);
+        ritardo(10);
         --gemma.legendary;
     } else if (gemmaDaUsare == "mythical") {
         simulaTastiera("owo use " + gemma.string_mythical);
+        keybd_event(VK_RETURN, 0, 0, 0);
+        ritardo(10);
         --gemma.mythical;
     } else if (gemmaDaUsare == "epic") {
         simulaTastiera("owo use " + gemma.string_epic);
+        keybd_event(VK_RETURN, 0, 0, 0);
+        ritardo(10);
         --gemma.epic;
     } else if (gemmaDaUsare == "rare") {
         simulaTastiera("owo use " + gemma.string_rare);
+        keybd_event(VK_RETURN, 0, 0, 0);
+        ritardo(10);
         --gemma.rare;
     } else if (gemmaDaUsare == "uncommon") {
         simulaTastiera("owo use " + gemma.string_uncommon);
+        keybd_event(VK_RETURN, 0, 0, 0);
+        ritardo(10);
         --gemma.uncommon;
     } else if (gemmaDaUsare == "common") {
         simulaTastiera("owo use " + gemma.string_common);
+        keybd_event(VK_RETURN, 0, 0, 0);
+        ritardo(10);
         --gemma.common;
     }
 }
@@ -156,6 +170,9 @@ void aggiornamentoDurability(Gemma &gemma){
     if(gemma.uncommon==0) gemma.durability_uncommon=0;
     if(gemma.common==0) gemma.durability_common=0;
 }
+void usaGemme(Gemma gemma){
+    disponibilita_gemma_maggiore(gemma);
+}
 int main() {
     //imposta il seed in base al tempo in modo che siano numeri casuali
     srand(time(0));
@@ -245,7 +262,7 @@ int main() {
     diamante.epic=0;
     diamante.mythical=0;
     diamante.legendary=0;
-    diamante.fabled=0;
+    diamante.fabled=1;
 
     //definizioni quantita cerchio
     cerchio.common=0;
@@ -263,13 +280,15 @@ int main() {
     cuore.epic=0;
     cuore.mythical=0;
     cuore.legendary=0;
-    cuore.fabled=0;
+    cuore.fabled=1;
 
     //per fare in modo che le durabilità delle gemme che non abbiamo siano a 0
     aggiornamentoDurability(diamante);
     aggiornamentoDurability(cuore);
     aggiornamentoDurability(cerchio);
-
+    usaGemme(diamante);
+    usaGemme(cuore);
+    usaGemme(cerchio);
     //variabile per il conteggio
     int conteggio=0;
     while(true){
