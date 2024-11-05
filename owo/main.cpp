@@ -195,19 +195,22 @@ void assegnazioneid(Gemma &gemma,int id){
         ++id;
     }
 }
+void conto_alla_rovescia(int inizio){
+    for(int i=inizio;i>0;--i){
+        std::cout<<"tra "<<i<<"inizia il programma";
+        ritardo(1);
+        std::cout<<"\033[2k";
+    }
+}
 int main() {
     //imposta il seed in base al tempo in modo che siano numeri casuali
     srand(time(0));
     //conto alla rovescia da 5 sec 
-    system("timeout 5");
-
-    #pragma region assegnazione_id
-
+    conto_alla_rovescia(5);
+    
     assegnazioneid(diamante,51);
     assegnazioneid(cerchio,65);
     assegnazioneid(cuore,72);
-
-    #pragma endregion assegnazione_id
     
     //definizioni quantita diamanti
     diamante.common=0;
@@ -240,6 +243,8 @@ int main() {
     aggiornamentoDurability(diamante);
     aggiornamentoDurability(cuore);
     aggiornamentoDurability(cerchio);
+
+    //comando che dice owo use poi scrive l'id delle gemme con il rango maggiore
     usaGemme(diamante);
     usaGemme(cuore);
     usaGemme(cerchio);

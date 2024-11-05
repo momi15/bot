@@ -42,6 +42,7 @@ void ridimensionaGemme(Gemma &gemma);
 void disponibilita_gemma_maggiore(Gemma &gemma);
 std::string controlloNelMagazino(Gemma gemma);
 void assegnazioneid(Gemma &gemma,int inizio);
+void conto_alla_rovescia(int inizio);
 enum ranghi{
     common,
     uncommon,
