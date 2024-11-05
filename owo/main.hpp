@@ -31,7 +31,7 @@ struct Gemma
             durability_mythical=525,
             durability_epic=450,
             durability_rare=250,
-            durability_uncommon=10,
+            durability_uncommon=100,
             durability_common=50;
     };
 
