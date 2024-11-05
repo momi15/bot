@@ -197,7 +197,7 @@ void assegnazioneid(Gemma &gemma,int id){
 }
 void conto_alla_rovescia(int inizio){
     for(int i=inizio;i>0;--i){
-        std::cout<<"tra "<<i<<"inizia il programma";
+        std::cout<<"\033[1;33m tra "<<i<<" inizia il programma\\033[0;0m";
         ritardo(1);
         std::cout<<"\033[1A\033[2K";
     }
