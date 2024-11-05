@@ -288,7 +288,7 @@ int main() {
     int conteggio=0;
     while(true){
         //scrittura di owob
-        simulaTastiera("owob");
+        simulaTastiera(std::to_string(conteggio)+")"+"owob");
         //schiaccia il tasto invio
         keybd_event(VK_RETURN, 0, 0, 0);
         //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
@@ -296,7 +296,7 @@ int main() {
         //incremento per il conteggio
         ++conteggio;
         //scrittura di owoh
-        simulaTastiera("owoh");
+        simulaTastiera(std::to_string(conteggio)+")"+"owoh");
         keybd_event(VK_RETURN, 0, 0, 0);
         //funzione che serve per decrementare il valore della durability dell gemme
         decrementoGemme(diamante,cerchio,cuore);
