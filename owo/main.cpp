@@ -23,23 +23,23 @@ void ritardo(int delay){
     std::cout<<delay<<std::endl;
 }
 std::string controlloQualeGemmaStoUsando(Gemma &gemma){
-    if(gemma.durability_fabled!=0)return "fabled";
-    if(gemma.durability_legendary!=0)return "legendary";
-    if(gemma.durability_mythical!=0)return "mythical";
-    if(gemma.durability_epic!=0)return "epic";
-    if(gemma.durability_rare!=0)return "rare";
-    if(gemma.durability_uncommon!=0)return "uncommon";
-    if(gemma.durability_common!=0)return "common";
+    if(gemma.durability_fabled>0)return "fabled";
+    if(gemma.durability_legendary>0)return "legendary";
+    if(gemma.durability_mythical>0)return "mythical";
+    if(gemma.durability_epic>0)return "epic";
+    if(gemma.durability_rare>0)return "rare";
+    if(gemma.durability_uncommon>0)return "uncommon";
+    if(gemma.durability_common>0)return "common";
     return "";
 }
 std::string controlloNelMagazino(Gemma gemma){
-    if(gemma.fabled!=0)return "fabled";
-    if(gemma.legendary!=0)return "legendary";
-    if(gemma.mythical!=0)return "mythical";
-    if(gemma.epic!=0)return "epic";
-    if(gemma.rare!=0)return "rare";
-    if(gemma.uncommon!=0)return "uncommon";
-    if(gemma.common!=0)return "common";
+    if(gemma.fabled>0)return "fabled";
+    if(gemma.legendary>0)return "legendary";
+    if(gemma.mythical>0)return "mythical";
+    if(gemma.epic>0)return "epic";
+    if(gemma.rare>0)return "rare";
+    if(gemma.uncommon>0)return "uncommon";
+    if(gemma.common>0)return "common";
     return "";
 }
 void disponibilita_gemma_maggiore(Gemma &gemma) {
@@ -47,36 +47,57 @@ void disponibilita_gemma_maggiore(Gemma &gemma) {
     if (gemmaDaUsare == "fabled") {
         simulaTastiera("owo use " + gemma.string_fabled);
         keybd_event(VK_RETURN, 0, 0, 0);
+        if(gemma.fabled>0){
+            gemma.durability_fabled=1000;
+        }
         ritardo(10);
         --gemma.fabled;
     } else if (gemmaDaUsare == "legendary") {
         simulaTastiera("owo use " + gemma.string_legendary);
         keybd_event(VK_RETURN, 0, 0, 0);
+        if(gemma.legendary>0){
+            gemma.durability_legendary=800;
+        }
         ritardo(10);
         --gemma.legendary;
     } else if (gemmaDaUsare == "mythical") {
         simulaTastiera("owo use " + gemma.string_mythical);
         keybd_event(VK_RETURN, 0, 0, 0);
+        if(gemma.mythical>0){
+            gemma.durability_mythical=525;
+        }
         ritardo(10);
         --gemma.mythical;
     } else if (gemmaDaUsare == "epic") {
         simulaTastiera("owo use " + gemma.string_epic);
         keybd_event(VK_RETURN, 0, 0, 0);
+        if(gemma.epic>0){
+            gemma.durability_epic=450;
+        }
         ritardo(10);
         --gemma.epic;
     } else if (gemmaDaUsare == "rare") {
         simulaTastiera("owo use " + gemma.string_rare);
         keybd_event(VK_RETURN, 0, 0, 0);
+        if(gemma.rare>0){
+            gemma.durability_rare=250;
+        }
         ritardo(10);
         --gemma.rare;
     } else if (gemmaDaUsare == "uncommon") {
         simulaTastiera("owo use " + gemma.string_uncommon);
         keybd_event(VK_RETURN, 0, 0, 0);
+        if(gemma.uncommon>0){
+            gemma.durability_uncommon=100;
+        }
         ritardo(10);
         --gemma.uncommon;
     } else if (gemmaDaUsare == "common") {
         simulaTastiera("owo use " + gemma.string_common);
         keybd_event(VK_RETURN, 0, 0, 0);
+        if(gemma.common>0){
+            gemma.durability_common=50;
+        }
         ritardo(10);
         --gemma.common;
     }
@@ -228,32 +249,6 @@ int main() {
     cuore.string_fabled=std::to_string(id);
     ++id;
     #pragma endregion assegnazione_id
-
-    #pragma region assegnazione_durabilita
-    diamante.durability_common=50;
-    diamante.durability_uncommon=100;
-    diamante.durability_rare=250;
-    diamante.durability_epic=450;
-    diamante.durability_mythical=525;
-    diamante.durability_legendary=800;
-    diamante.durability_fabled=1000;
-
-    cerchio.durability_common=50;
-    cerchio.durability_uncommon=100;
-    cerchio.durability_rare=250;
-    cerchio.durability_epic=450;
-    cerchio.durability_mythical=525;
-    cerchio.durability_legendary=800;
-    cerchio.durability_fabled=1000;
-
-    cuore.durability_common=50;
-    cuore.durability_uncommon=100;
-    cuore.durability_rare=250;
-    cuore.durability_epic=450;
-    cuore.durability_mythical=525;
-    cuore.durability_legendary=800;
-    cuore.durability_fabled=1000;
-    #pragma endregion assegnazione_durabilita
     
     //definizioni quantita diamanti
     diamante.common=0;
@@ -262,7 +257,7 @@ int main() {
     diamante.epic=0;
     diamante.mythical=0;
     diamante.legendary=0;
-    diamante.fabled=1;
+    diamante.fabled=0;
 
     //definizioni quantita cerchio
     cerchio.common=0;
@@ -302,6 +297,7 @@ int main() {
         ++conteggio;
         //scrittura di owoh
         simulaTastiera("owoh");
+        keybd_event(VK_RETURN, 0, 0, 0);
         //funzione che serve per decrementare il valore della durability dell gemme
         decrementoGemme(diamante,cerchio,cuore);
         //schiaccia il tasto invio

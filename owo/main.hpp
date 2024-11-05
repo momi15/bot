@@ -26,13 +26,13 @@ struct Gemma
             uncommon=0,
             common=0;
 
-        int durability_fabled=0,
-            durability_legendary=0,
-            durability_mythical=0,
-            durability_epic=0,
-            durability_rare=0,
-            durability_uncommon=0,
-            durability_common=0;
+        int durability_fabled=1000,
+            durability_legendary=800,
+            durability_mythical=525,
+            durability_epic=450,
+            durability_rare=250,
+            durability_uncommon=100,
+            durability_common=50;
     };
 
 //dichiarazione varie gemme
