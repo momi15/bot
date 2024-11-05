@@ -271,7 +271,7 @@ int main() {
     cerchio.epic=0;
     cerchio.mythical=0;
     cerchio.legendary=0;
-    cerchio.fabled=0;
+    cerchio.fabled=1;
 
     //definizioni quantita cuore
     cuore.common=0;
