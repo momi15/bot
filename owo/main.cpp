@@ -300,7 +300,8 @@ int main() {
         keybd_event(VK_RETURN, 0, 0, 0);
         //funzione che serve per decrementare il valore della durability dell gemme
         decrementoGemme(diamante,cerchio,cuore);
-        std::cout<<diamante.durability_common<<std::endl<<cuore.durability_common<<std::endl<<cerchio.durability_common<<std::endl;
+        std::cout<<diamante.durability_common<<std::endl<<cuore.durability_common<<std::endl<<cerchio.durability_common<<std::endl<<std::endl;
+        ritardo(5);
         //schiaccia il tasto invio
         keybd_event(VK_RETURN, 0, 0, 0);
         //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
