@@ -271,7 +271,7 @@ int main() {
     cerchio.epic=0;
     cerchio.mythical=0;
     cerchio.legendary=0;
-    cerchio.fabled=1;
+    cerchio.fabled=0;
 
     //definizioni quantita cuore
     cuore.common=0;
@@ -280,7 +280,7 @@ int main() {
     cuore.epic=0;
     cuore.mythical=0;
     cuore.legendary=0;
-    cuore.fabled=1;
+    cuore.fabled=0;
 
     //per fare in modo che le durabilità delle gemme che non abbiamo siano a 0
     aggiornamentoDurability(diamante);
