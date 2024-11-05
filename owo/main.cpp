@@ -14,6 +14,7 @@ void simulaTastiera(const std::string& testo) {
         input.ki.dwFlags |= KEYEVENTF_KEYUP;
         SendInput(1, &input, sizeof(INPUT));
     }
+    keybd_event(VK_RETURN, 0, 0, 0);
 }
 int NumeriCasuali(int max,int min){
     return static_cast<int>(rand()%(max-min+1)+min);
@@ -45,56 +46,49 @@ std::string controlloNelMagazino(Gemma gemma){
 void disponibilita_gemma_maggiore(Gemma &gemma) {
     std::string gemmaDaUsare = controlloNelMagazino(gemma);
     if (gemmaDaUsare == "fabled") {
-        simulaTastiera("owo use " + gemma.string_fabled);
-        keybd_event(VK_RETURN, 0, 0, 0);
+        simulaTastiera("owo use " + gemma.id[fabled]);
         if(gemma.fabled>0){
             gemma.durability_fabled=1000;
         }
         ritardo(10);
         --gemma.fabled;
     } else if (gemmaDaUsare == "legendary") {
-        simulaTastiera("owo use " + gemma.string_legendary);
-        keybd_event(VK_RETURN, 0, 0, 0);
+        simulaTastiera("owo use " + gemma.id[legendary]);
         if(gemma.legendary>0){
             gemma.durability_legendary=800;
         }
         ritardo(10);
         --gemma.legendary;
     } else if (gemmaDaUsare == "mythical") {
-        simulaTastiera("owo use " + gemma.string_mythical);
-        keybd_event(VK_RETURN, 0, 0, 0);
+        simulaTastiera("owo use " + gemma.id[mythical]);
         if(gemma.mythical>0){
             gemma.durability_mythical=525;
         }
         ritardo(10);
         --gemma.mythical;
     } else if (gemmaDaUsare == "epic") {
-        simulaTastiera("owo use " + gemma.string_epic);
-        keybd_event(VK_RETURN, 0, 0, 0);
+        simulaTastiera("owo use " + gemma.id[epic]);
         if(gemma.epic>0){
             gemma.durability_epic=450;
         }
         ritardo(10);
         --gemma.epic;
     } else if (gemmaDaUsare == "rare") {
-        simulaTastiera("owo use " + gemma.string_rare);
-        keybd_event(VK_RETURN, 0, 0, 0);
+        simulaTastiera("owo use " + gemma.id[rare]);
         if(gemma.rare>0){
             gemma.durability_rare=250;
         }
         ritardo(10);
         --gemma.rare;
     } else if (gemmaDaUsare == "uncommon") {
-        simulaTastiera("owo use " + gemma.string_uncommon);
-        keybd_event(VK_RETURN, 0, 0, 0);
+        simulaTastiera("owo use " + gemma.id[uncommon]);
         if(gemma.uncommon>0){
             gemma.durability_uncommon=100;
         }
         ritardo(10);
         --gemma.uncommon;
     } else if (gemmaDaUsare == "common") {
-        simulaTastiera("owo use " + gemma.string_common);
-        keybd_event(VK_RETURN, 0, 0, 0);
+        simulaTastiera("owo use " + gemma.id[common]);
         if(gemma.common>0){
             gemma.durability_common=50;
         }
@@ -120,22 +114,22 @@ void ridimensionaGemme(Gemma &gemma) {
             disponibilita_gemma_maggiore(gemma);
         }
     } else if (gemmaInUso == "epic") {
-        gemma.durability_epic -= 7;
+        gemma.durability_epic -= 6;
         if (gemma.durability_epic <= 0) {
             disponibilita_gemma_maggiore(gemma);
         }
     } else if (gemmaInUso == "rare") {
-        gemma.durability_rare -= 7;
+        gemma.durability_rare -= 5;
         if (gemma.durability_rare <= 0) {
             disponibilita_gemma_maggiore(gemma);
         }
     } else if (gemmaInUso == "uncommon") {
-        gemma.durability_uncommon -= 7;
+        gemma.durability_uncommon -= 4;
         if (gemma.durability_uncommon <= 0) {
             disponibilita_gemma_maggiore(gemma);
         }
     } else if (gemmaInUso == "common") {
-        gemma.durability_common -= 7;
+        gemma.durability_common -= 2;
         if (gemma.durability_common <= 0) {
             disponibilita_gemma_maggiore(gemma);
         }
@@ -183,16 +177,22 @@ void decrementoGemme(Gemma &diamante,Gemma&cerchio,Gemma&cuore){
     }
 }
 void aggiornamentoDurability(Gemma &gemma){
-    if(gemma.fabled==0) gemma.durability_fabled=0;
-    if(gemma.legendary==0) gemma.durability_legendary=0;
-    if(gemma.epic==0) gemma.durability_epic=0;
-    if(gemma.mythical==0) gemma.durability_mythical=0;
-    if(gemma.rare==0) gemma.durability_rare=0;
-    if(gemma.uncommon==0) gemma.durability_uncommon=0;
-    if(gemma.common==0) gemma.durability_common=0;
+    if(gemma.fabled<=0) gemma.durability_fabled=0;
+    if(gemma.legendary<=0) gemma.durability_legendary=0;
+    if(gemma.epic<=0) gemma.durability_epic=0;
+    if(gemma.mythical<=0) gemma.durability_mythical=0;
+    if(gemma.rare<=0) gemma.durability_rare=0;
+    if(gemma.uncommon<=0) gemma.durability_uncommon=0;
+    if(gemma.common<=0) gemma.durability_common=0;
 }
 void usaGemme(Gemma gemma){
     disponibilita_gemma_maggiore(gemma);
+}
+void assegnazioneid(Gemma &gemma,int inizio){
+    for(int id=inizio;id<massimo;++id){
+        gemma.id.push_back(std::to_string(id));
+        std::cout<<id<<std::endl;
+    }
 }
 int main() {
     //imposta il seed in base al tempo in modo che siano numeri casuali
@@ -201,58 +201,16 @@ int main() {
     system("timeout 5");
 
     #pragma region assegnazione_id
-    int id=51;
-    diamante.string_common=std::to_string(id);
-    ++id;
-    diamante.string_uncommon=std::to_string(id);
-    ++id;
-    diamante.string_rare=std::to_string(id);
-    ++id;
-    diamante.string_epic=std::to_string(id);
-    ++id;
-    diamante.string_mythical=std::to_string(id);
-    ++id;
-    diamante.string_legendary=std::to_string(id);
-    ++id;
-    diamante.string_fabled=std::to_string(id);
-    ++id;
 
-    id=65;
-    cerchio.string_common=std::to_string(id);
-    ++id;
-    cerchio.string_uncommon=std::to_string(id);
-    ++id;
-    cerchio.string_rare=std::to_string(id);
-    ++id;
-    cerchio.string_epic=std::to_string(id);
-    ++id;
-    cerchio.string_mythical=std::to_string(id);
-    ++id;
-    cerchio.string_legendary=std::to_string(id);
-    ++id;
-    cerchio.string_fabled=std::to_string(id);
-    ++id;
+    assegnazioneid(diamante,51);
+    assegnazioneid(cerchio,65);
+    assegnazioneid(cuore,72);
 
-    id=72;
-    cuore.string_common=std::to_string(id);
-    ++id;
-    cuore.string_uncommon=std::to_string(id);
-    ++id;
-    cuore.string_rare=std::to_string(id);
-    ++id;
-    cuore.string_epic=std::to_string(id);
-    ++id;
-    cuore.string_mythical=std::to_string(id);
-    ++id;
-    cuore.string_legendary=std::to_string(id);
-    ++id;
-    cuore.string_fabled=std::to_string(id);
-    ++id;
     #pragma endregion assegnazione_id
     
     //definizioni quantita diamanti
     diamante.common=0;
-    diamante.uncommon=2;
+    diamante.uncommon=0;
     diamante.rare=0;
     diamante.epic=0;
     diamante.mythical=0;
@@ -261,7 +219,7 @@ int main() {
 
     //definizioni quantita cerchio
     cerchio.common=0;
-    cerchio.uncommon=2;
+    cerchio.uncommon=0;
     cerchio.rare=0;
     cerchio.epic=0;
     cerchio.mythical=0;
@@ -270,7 +228,7 @@ int main() {
 
     //definizioni quantita cuore
     cuore.common=0;
-    cuore.uncommon=2;
+    cuore.uncommon=0;
     cuore.rare=0;
     cuore.epic=0;
     cuore.mythical=0;
@@ -288,24 +246,20 @@ int main() {
     int conteggio=0;
     while(true){
         //scrittura di owob
-        simulaTastiera(std::to_string(conteggio)+")"+"owob");
-        //schiaccia il tasto invio
-        keybd_event(VK_RETURN, 0, 0, 0);
+        simulaTastiera("owob");
         //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
-//        ritardo(NumeriCasuali(16,8));
+        ritardo(NumeriCasuali(16,8));
         //incremento per il conteggio
         ++conteggio;
         //scrittura di owoh
-        simulaTastiera(std::to_string(conteggio)+")"+"owoh");
+        simulaTastiera("owoh");
         keybd_event(VK_RETURN, 0, 0, 0);
         //funzione che serve per decrementare il valore della durability dell gemme
         decrementoGemme(diamante,cerchio,cuore);
-        std::cout<<diamante.durability_common<<std::endl<<cuore.durability_common<<std::endl<<cerchio.durability_common<<std::endl<<std::endl;
-        ritardo(5);
         //schiaccia il tasto invio
         keybd_event(VK_RETURN, 0, 0, 0);
         //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
-//        ritardo(NumeriCasuali(16,8));
+        ritardo(NumeriCasuali(16,8));
         //incremento per il conteggio
         ++conteggio;
         //ritardo dopo un ora di n casuale tra i 600 e i 300

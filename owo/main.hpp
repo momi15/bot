@@ -10,13 +10,7 @@
 //definizione della gemma
 struct Gemma
     {
-    std::string string_fabled="",
-                string_legendary="",
-                string_mythical="",
-                string_epic="",
-                string_rare="",
-                string_uncommon="",
-                string_common="";
+    std::vector<std::string> id;
 
         int fabled=0,
             legendary=0,
@@ -46,5 +40,15 @@ void decrementoGemme(Gemma &diamante,Gemma&cerchio,Gemma&cuore);
 std::string controlloQualeGemmaStoUsando(Gemma &gemma);
 void ridimensionaGemme(Gemma &gemma);
 void disponibilita_gemma_maggiore(Gemma &gemma);
-
 std::string controlloNelMagazino(Gemma gemma);
+void assegnazioneid(Gemma &gemma,int inizio);
+enum ranghi{
+    common,
+    uncommon,
+    rare,
+    epic,
+    mythical,
+    legendary,
+    fabled,
+    massimo,
+};
