@@ -252,7 +252,7 @@ int main() {
     
     //definizioni quantita diamanti
     diamante.common=0;
-    diamante.uncommon=0;
+    diamante.uncommon=2;
     diamante.rare=0;
     diamante.epic=0;
     diamante.mythical=0;
@@ -261,7 +261,7 @@ int main() {
 
     //definizioni quantita cerchio
     cerchio.common=0;
-    cerchio.uncommon=0;
+    cerchio.uncommon=2;
     cerchio.rare=0;
     cerchio.epic=0;
     cerchio.mythical=0;
@@ -270,7 +270,7 @@ int main() {
 
     //definizioni quantita cuore
     cuore.common=0;
-    cuore.uncommon=0;
+    cuore.uncommon=2;
     cuore.rare=0;
     cuore.epic=0;
     cuore.mythical=0;
