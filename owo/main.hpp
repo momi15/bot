@@ -37,12 +37,14 @@ void simulaTastiera(const std::string& testo);
 int NumeriCasuali(int max,int min);
 void ritardo(int delay);
 void decrementoGemme(Gemma &diamante,Gemma&cerchio,Gemma&cuore);
-std::string controlloQualeGemmaStoUsando(Gemma &gemma);
+int controlloQualeGemmaStoUsando(Gemma &gemma);
 void ridimensionaGemme(Gemma &gemma);
 void disponibilita_gemma_maggiore(Gemma &gemma);
-std::string controlloNelMagazino(Gemma gemma);
+int controlloNelMagazino(Gemma gemma);
 void assegnazioneid(Gemma &gemma,int inizio);
 void conto_alla_rovescia(int inizio);
+void aggiornaGemmeAllInizio(Gemma &gemme);
+//enum dei vari ranghi
 enum ranghi{
     common,
     uncommon,
