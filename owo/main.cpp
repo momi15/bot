@@ -336,16 +336,16 @@ int main() {
     aggiornamentoDurability(diamante);
     aggiornamentoDurability(cuore);
     aggiornamentoDurability(cerchio);
-
     //regolazione iniziale delle gemme
     aggiornaGemmeAllInizio(diamante);
     aggiornaGemmeAllInizio(cuore);
     aggiornaGemmeAllInizio(cerchio);
-    
+
     //comando che dice owo use poi scrive l'id delle gemme con il rango maggiore
     usaGemme(diamante);
     usaGemme(cuore);
     usaGemme(cerchio);
+    
     //variabile per il conteggio
     int conteggio=0;
     while(true){
