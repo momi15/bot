@@ -5,6 +5,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <thread>
+#include <vector>
 #include <chrono> 
 #include <iostream>
 //definizione della gemma
@@ -38,7 +39,7 @@ int NumeriCasuali(int max,int min);
 void ritardo(int delay);
 void decrementoGemme(Gemma &diamante,Gemma&cerchio,Gemma&cuore);
 int controlloQualeGemmaStoUsando(Gemma &gemma);
-void ridimensionaGemme(Gemma &gemma);
+void ridimensionaGemme(Gemma &gemma,int decremento);
 void disponibilita_gemma_maggiore(Gemma &gemma);
 int controlloNelMagazino(Gemma gemma);
 void assegnazioneid(Gemma &gemma,int inizio);

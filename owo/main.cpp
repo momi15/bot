@@ -116,54 +116,54 @@ void disponibilita_gemma_maggiore(Gemma &gemma) {
     }
 }
 //data una gemma controlla quale è quella con il rango più alto con della durabilità e decrementa quella durabilità
-void ridimensionaGemme(Gemma &gemma) {
+void ridimensionaGemme(Gemma &gemma,int decremento) {
     //switch che in base al valore returnato dalla funzione controlloQualeGemmaStoUsando suddivide il tutto  
     switch (controlloQualeGemmaStoUsando(gemma))
     {
         case fabled:{
-            gemma.durability_fabled -= 10;
+            gemma.durability_fabled -= decremento;
             if (gemma.durability_fabled <= 0) {
                 disponibilita_gemma_maggiore(gemma);
             }
         break;
         }
         case legendary:{
-            gemma.durability_legendary -= 8;
+            gemma.durability_legendary -= decremento;
             if (gemma.durability_legendary <= 0) {
                 disponibilita_gemma_maggiore(gemma);
             }
         break;
         }
         case mythical:{
-            gemma.durability_mythical -= 7;
+            gemma.durability_mythical -= decremento;
             if (gemma.durability_mythical <= 0) {
                 disponibilita_gemma_maggiore(gemma);
             }
         break;
         }
         case epic:{
-            gemma.durability_epic -= 6;
+            gemma.durability_epic -= decremento;
             if (gemma.durability_epic <= 0) {
                 disponibilita_gemma_maggiore(gemma);
             }
         break;
         }
         case rare:{
-            gemma.durability_rare -= 5;
+            gemma.durability_rare -= decremento;
             if (gemma.durability_rare <= 0) {
                 disponibilita_gemma_maggiore(gemma);
             }
         break;
         }
         case uncommon:{
-            gemma.durability_uncommon -= 4;
+            gemma.durability_uncommon -= decremento;
             if (gemma.durability_uncommon <= 0) {
                 disponibilita_gemma_maggiore(gemma);
             }
         break;
         }
         case common:{
-            gemma.durability_common -= 2;
+            gemma.durability_common -= decremento;
             if (gemma.durability_common <= 0) {
                 disponibilita_gemma_maggiore(gemma);
             }
@@ -181,44 +181,44 @@ void decrementoGemme(Gemma &diamante,Gemma&cerchio,Gemma&cuore){
     {        
         case fabled:{
             --diamante.durability_fabled;
-            ridimensionaGemme(cuore);
-            ridimensionaGemme(cerchio);
+            ridimensionaGemme(cuore,10);
+            ridimensionaGemme(cerchio,10);
             break;
         }
         case legendary:{
             --diamante.durability_legendary;
-            ridimensionaGemme(cuore);
-            ridimensionaGemme(cerchio);
+            ridimensionaGemme(cuore,8);
+            ridimensionaGemme(cerchio,8);
             break;
         }
         case mythical:{
             --diamante.durability_mythical;
-            ridimensionaGemme(cuore);
-            ridimensionaGemme(cerchio);
+            ridimensionaGemme(cuore,7);
+            ridimensionaGemme(cerchio,7);
             break;
         }
         case epic:{
             --diamante.durability_epic;
-            ridimensionaGemme(cuore);
-            ridimensionaGemme(cerchio);
+            ridimensionaGemme(cuore,6);
+            ridimensionaGemme(cerchio,6);
             break;
         }
         case rare:{
             --diamante.durability_rare;
-            ridimensionaGemme(cuore);
-            ridimensionaGemme(cerchio);
+            ridimensionaGemme(cuore,5);
+            ridimensionaGemme(cerchio,5);
             break;
         }
         case uncommon:{
             --diamante.durability_uncommon;
-            ridimensionaGemme(cuore);
-            ridimensionaGemme(cerchio);
+            ridimensionaGemme(cuore,4);
+            ridimensionaGemme(cerchio,4);
             break;
         }
         case common:{
             --diamante.durability_common;
-            ridimensionaGemme(cuore);
-            ridimensionaGemme(cerchio);
+            ridimensionaGemme(cuore,2);
+            ridimensionaGemme(cerchio,2);
             break;
         }
         default:{
@@ -342,9 +342,9 @@ int main() {
     aggiornaGemmeAllInizio(cerchio);
 
     //comando che dice owo use poi scrive l'id delle gemme con il rango maggiore
-    usaGemme(diamante);
-    usaGemme(cuore);
-    usaGemme(cerchio);
+    // usaGemme(diamante);
+    // usaGemme(cuore);
+    // usaGemme(cerchio);
     
     //variabile per il conteggio
     int conteggio=0;
@@ -358,7 +358,7 @@ int main() {
         //scrittura di owoh
         simulaTastiera("owoh");
         //funzione che serve per decrementare il valore della durability dell gemme
-        decrementoGemme(diamante,cerchio,cuore);
+//        decrementoGemme(diamante,cerchio,cuore);
         //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
         ritardo(NumeriCasuali(16,8));
         //incremento per il conteggio
