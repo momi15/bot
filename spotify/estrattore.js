@@ -3,6 +3,9 @@
   const recommendedTracks = document.querySelectorAll('[data-testid="recommended-track"]');
   recommendedTracks.forEach(track => track.remove());
 
+  const esplicito = document.querySelectorAll('[aria-label="Esplicito"]');
+  esplicito.forEach(track => track.remove());
+
   // Estrae e stampa il contenuto delle righe rimanenti
   const rows = document.querySelectorAll('[data-testid="tracklist-row"]');
   let output = [];
