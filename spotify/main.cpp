@@ -61,7 +61,6 @@ int main(){
     mouse.type=INPUT_MOUSE;
     mouse.mi.dwExtraInfo=0;
     mouse.mi.time=0;
-    WPARAM prog;
     POINT Punti[4]={0};
     size_t i=0;
     std::string titolo="";
