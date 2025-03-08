@@ -124,7 +124,9 @@ int main(){
     }
     if(!DeleteFile("playlist.txt")){
         std::cout<<"non è stato possibile eliminare il file playlist.txt";
+        std::cin.get();
     }
-    std::cin.get();
     return 0;
 }
+
+
