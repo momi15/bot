@@ -1,7 +1,7 @@
 #include "main.hpp"
 //funzione che simula la pressione di un tasto
 void simulaTastiera(const std::string& testo) {
-    for (char c : testo) {
+    for (char c : testo){
         INPUT input;
         input.type = INPUT_KEYBOARD;
         input.ki.wVk = 0;
@@ -17,6 +17,7 @@ void simulaTastiera(const std::string& testo) {
     }
     keybd_event(VK_RETURN, 0, 0, 0);
 }
+
 //funzione che dati 2 numeri uno massimo e uno minimo generi dei numeri tra di loro compresi loro
 int NumeriCasuali(int max,int min){
     return static_cast<int>(rand()%(max-min+1)+min);
@@ -348,24 +349,34 @@ int main() {
     
     //variabile per il conteggio
     int conteggio=0;
+    bool antiRipetizione=true,vai=true;
     while(true){
-        //scrittura di owob
-        simulaTastiera("owob");
-        //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
-        ritardo(NumeriCasuali(16,8));
-        //incremento per il conteggio
-        ++conteggio;
-        //scrittura di owoh
-        simulaTastiera("owoh");
-        //funzione che serve per decrementare il valore della durability dell gemme
-//        decrementoGemme(diamante,cerchio,cuore);
-        //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
-        ritardo(NumeriCasuali(16,8));
-        //incremento per il conteggio
-        ++conteggio;
-        //ritardo dopo un ora di n casuale tra i 600 e i 300
-        if(conteggio%360==0){
-            ritardo(NumeriCasuali(600,300));
+        if(GetAsyncKeyState(0x53)!=0&&antiRipetizione){
+            antiRipetizione=false;
+            vai=!vai;
+        }
+        if(GetAsyncKeyState(0x53)==0&&!antiRipetizione){
+            antiRipetizione=true;
+        }
+        if(vai){
+            //scrittura di owob
+            simulaTastiera("owob");
+            //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
+            ritardo(NumeriCasuali(16,8));
+            //incremento per il conteggio
+            ++conteggio;
+            //scrittura di owoh
+            simulaTastiera("owoh");
+            //funzione che serve per decrementare il valore della durability dell gemme
+    //        decrementoGemme(diamante,cerchio,cuore);
+            //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
+            ritardo(NumeriCasuali(16,8));
+            //incremento per il conteggio
+            ++conteggio;
+            //ritardo dopo un ora di n casuale tra i 600 e i 300
+            if(conteggio%360==0){
+                ritardo(NumeriCasuali(600,300));
+            }
         }
     }
     return 0;
