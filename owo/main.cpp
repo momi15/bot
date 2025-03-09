@@ -359,6 +359,7 @@ int main() {
             antiRipetizione=true;
         }
         if(vai){
+            ritardo(3);
             //scrittura di owob
             simulaTastiera("owob");
             //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
@@ -377,6 +378,10 @@ int main() {
             if(conteggio%360==0){
                 ritardo(NumeriCasuali(600,300));
             }
+        }
+        else{
+            std::cout<<"non stampo\n";
+            ritardo(1);
         }
     }
     return 0;
