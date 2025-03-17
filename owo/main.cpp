@@ -368,18 +368,29 @@ int main() {
         if(GetAsyncKeyState(0x53)==0&&!antiRipetizione){
             antiRipetizione=true;
         }
+        ritardo(3);
+        //scrittura di owob
         if(vai){
-            ritardo(3);
-            //scrittura di owob
             simulaTastiera(input,"owob");
-            //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
-            ritardo(NumeriCasuali(16,8));
-            //incremento per il conteggio
-            ++conteggio;
-            //scrittura di owoh
+        }
+        else{
+            std::cout<<"non stampo\n";
+            ritardo(1);
+        }
+        //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
+        ritardo(NumeriCasuali(16,8));
+        //incremento per il conteggio
+        ++conteggio;
+        //scrittura di owoh
+        if(vai){
             simulaTastiera(input,"owoh");
-            //funzione che serve per decrementare il valore della durability dell gemme
-    //        decrementoGemme(diamante,cerchio,cuore);
+        }
+        else{
+            std::cout<<"non stampo\n";
+            ritardo(1);
+        }
+        //funzione che serve per decrementare il valore della durability dell gemme
+        //decrementoGemme(diamante,cerchio,cuore);
             //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
             ritardo(NumeriCasuali(16,8));
             //incremento per il conteggio
@@ -389,11 +400,6 @@ int main() {
                 ritardo(NumeriCasuali(600,300));
             }
         }
-        else{
-            std::cout<<"non stampo\n";
-            ritardo(1);
-        }
-    }
     delete [] input;
     return 0;
 }
