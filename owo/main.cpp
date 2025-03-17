@@ -368,7 +368,6 @@ int main() {
         if(GetAsyncKeyState(0x53)==0&&!antiRipetizione){
             antiRipetizione=true;
         }
-        ritardo(3);
         //scrittura di owob
         if(vai){
             simulaTastiera(input,"owob");
