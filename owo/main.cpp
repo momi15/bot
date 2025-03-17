@@ -372,18 +372,19 @@ int main() {
         //scrittura di owob
         if(vai){
             simulaTastiera(input,"owob");
+            ritardo(NumeriCasuali(16,8));
         }
         else{
             std::cout<<"non stampo\n";
             ritardo(1);
         }
         //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
-        ritardo(NumeriCasuali(16,8));
         //incremento per il conteggio
         ++conteggio;
         //scrittura di owoh
         if(vai){
             simulaTastiera(input,"owoh");
+            ritardo(NumeriCasuali(16,8));
         }
         else{
             std::cout<<"non stampo\n";
@@ -392,7 +393,6 @@ int main() {
         //funzione che serve per decrementare il valore della durability dell gemme
         //decrementoGemme(diamante,cerchio,cuore);
             //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
-            ritardo(NumeriCasuali(16,8));
             //incremento per il conteggio
             ++conteggio;
             //ritardo dopo un ora di n casuale tra i 600 e i 300
