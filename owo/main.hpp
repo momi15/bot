@@ -34,13 +34,13 @@ struct Gemma
 Gemma diamante,cerchio,cuore;
 
 //funzioni
-void simulaTastiera(const std::string& testo);
+void simulaTastiera(PINPUT input,const std::string& testo);
 int NumeriCasuali(int max,int min);
 void ritardo(int delay);
-void decrementoGemme(Gemma &diamante,Gemma&cerchio,Gemma&cuore);
+void decrementoGemme(PINPUT input[4],Gemma &diamante,Gemma&cerchio,Gemma&cuore);
 int controlloQualeGemmaStoUsando(Gemma &gemma);
-void ridimensionaGemme(Gemma &gemma,int decremento);
-void disponibilita_gemma_maggiore(Gemma &gemma);
+void ridimensionaGemme(PINPUT input,Gemma &gemma,int decremento);
+void disponibilita_gemma_maggiore(PINPUT input,Gemma &gemma);
 int controlloNelMagazino(Gemma gemma);
 void assegnazioneid(Gemma &gemma,int inizio);
 void conto_alla_rovescia(int inizio);
@@ -56,3 +56,4 @@ enum ranghi{
     fabled,
     massimo,
 };
+extern LPINPUT input[4];

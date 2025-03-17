@@ -1,21 +1,13 @@
 #include "main.hpp"
 //funzione che simula la pressione di un tasto
-void simulaTastiera(const std::string& testo) {
+void simulaTastiera(PINPUT input[4],const std::string& testo){
     for (char c : testo){
-        INPUT input;
-        input.type = INPUT_KEYBOARD;
-        input.ki.wVk = 0;
-        input.ki.time = 0;
-        input.ki.dwExtraInfo = 0;
-        
-        input.ki.wScan = c;
-        input.ki.dwFlags = KEYEVENTF_UNICODE;
-        SendInput(1, &input, sizeof(INPUT));
-
-        input.ki.dwFlags |= KEYEVENTF_KEYUP;
-        SendInput(1, &input, sizeof(INPUT));
+        input[1]->ki.wScan=input[0]->ki.wScan = c;
+        SendInput(1, input[0], sizeof(INPUT));
+        SendInput(1, input[1], sizeof(INPUT));
     }
-    keybd_event(VK_RETURN, 0, 0, 0);
+    SendInput(1, input[2], sizeof(INPUT));
+    SendInput(1, input[3], sizeof(INPUT));
 }
 
 //funzione che dati 2 numeri uno massimo e uno minimo generi dei numeri tra di loro compresi loro
@@ -26,8 +18,10 @@ int NumeriCasuali(int max,int min){
 void ritardo(int delay){
     //stampa di quanto sarà il ritardo
     std::cout<<delay<<std::endl;
-    //crea un thread che serve per rallentare il programma e grazie a std::chrono::seconds impostiamo un ritardo in secondi
-    std::this_thread::sleep_for(std::chrono::seconds(delay));
+    for(size_t i=delay;i>0;--i){
+        //crea un thread che serve per rallentare il programma e grazie a std::chrono::seconds impostiamo un ritardo in secondi
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
 }
 //controlla quale gemma sto utilizzando in un dato momento
 int controlloQualeGemmaStoUsando(Gemma &gemma){
@@ -54,12 +48,12 @@ int controlloNelMagazino(Gemma gemma){
     return massimo;
 }
 //vede quale gemma ho il rango più alto
-void disponibilita_gemma_maggiore(Gemma &gemma) {
+void disponibilita_gemma_maggiore(PINPUT input[4],Gemma &gemma) {
     //switch per vedere quale gemma io abbia di rango più alto e userà quella gemma
     switch (controlloNelMagazino(gemma))
     {
     case fabled:
-        simulaTastiera("owo use " + gemma.id[fabled]);
+        simulaTastiera(input,"owo use " + gemma.id[fabled]);
         if(gemma.fabled>0){
             gemma.durability_fabled=1000;
         }
@@ -67,7 +61,7 @@ void disponibilita_gemma_maggiore(Gemma &gemma) {
         --gemma.fabled;
     break;
     case legendary:
-        simulaTastiera("owo use " + gemma.id[legendary]);
+        simulaTastiera(input,"owo use " + gemma.id[legendary]);
         if(gemma.legendary>0){
             gemma.durability_legendary=800;
         }
@@ -75,7 +69,7 @@ void disponibilita_gemma_maggiore(Gemma &gemma) {
         --gemma.legendary;
     break;
     case mythical:
-        simulaTastiera("owo use " + gemma.id[mythical]);
+        simulaTastiera(input,"owo use " + gemma.id[mythical]);
         if(gemma.mythical>0){
             gemma.durability_mythical=525;
         }
@@ -83,7 +77,7 @@ void disponibilita_gemma_maggiore(Gemma &gemma) {
         --gemma.mythical;
     break;
     case epic:
-        simulaTastiera("owo use " + gemma.id[epic]);
+        simulaTastiera(input,"owo use " + gemma.id[epic]);
         if(gemma.epic>0){
             gemma.durability_epic=450;
         }
@@ -91,7 +85,7 @@ void disponibilita_gemma_maggiore(Gemma &gemma) {
         --gemma.epic;
     break;
     case rare:
-        simulaTastiera("owo use " + gemma.id[rare]);
+        simulaTastiera(input,"owo use " + gemma.id[rare]);
         if(gemma.rare>0){
             gemma.durability_rare=250;
         }
@@ -99,7 +93,7 @@ void disponibilita_gemma_maggiore(Gemma &gemma) {
         --gemma.rare;
     break;
     case uncommon:
-        simulaTastiera("owo use " + gemma.id[uncommon]);
+        simulaTastiera(input,"owo use " + gemma.id[uncommon]);
         if(gemma.uncommon>0){
             gemma.durability_uncommon=100;
         }
@@ -107,7 +101,7 @@ void disponibilita_gemma_maggiore(Gemma &gemma) {
         --gemma.uncommon;
     break;
     case common:
-        simulaTastiera("owo use " + gemma.id[common]);
+        simulaTastiera(input,"owo use " + gemma.id[common]);
         if(gemma.common>0){
             gemma.durability_common=50;
         }
@@ -117,113 +111,113 @@ void disponibilita_gemma_maggiore(Gemma &gemma) {
     }
 }
 //data una gemma controlla quale è quella con il rango più alto con della durabilità e decrementa quella durabilità
-void ridimensionaGemme(Gemma &gemma,int decremento) {
+void ridimensionaGemme(PINPUT input[4],Gemma &gemma,int decremento) {
     //switch che in base al valore returnato dalla funzione controlloQualeGemmaStoUsando suddivide il tutto  
     switch (controlloQualeGemmaStoUsando(gemma))
     {
         case fabled:{
             gemma.durability_fabled -= decremento;
             if (gemma.durability_fabled <= 0) {
-                disponibilita_gemma_maggiore(gemma);
+                disponibilita_gemma_maggiore(input,gemma);
             }
         break;
         }
         case legendary:{
             gemma.durability_legendary -= decremento;
             if (gemma.durability_legendary <= 0) {
-                disponibilita_gemma_maggiore(gemma);
+                disponibilita_gemma_maggiore(input,gemma);
             }
         break;
         }
         case mythical:{
             gemma.durability_mythical -= decremento;
             if (gemma.durability_mythical <= 0) {
-                disponibilita_gemma_maggiore(gemma);
+                disponibilita_gemma_maggiore(input,gemma);
             }
         break;
         }
         case epic:{
             gemma.durability_epic -= decremento;
             if (gemma.durability_epic <= 0) {
-                disponibilita_gemma_maggiore(gemma);
+                disponibilita_gemma_maggiore(input,gemma);
             }
         break;
         }
         case rare:{
             gemma.durability_rare -= decremento;
             if (gemma.durability_rare <= 0) {
-                disponibilita_gemma_maggiore(gemma);
+                disponibilita_gemma_maggiore(input,gemma);
             }
         break;
         }
         case uncommon:{
             gemma.durability_uncommon -= decremento;
             if (gemma.durability_uncommon <= 0) {
-                disponibilita_gemma_maggiore(gemma);
+                disponibilita_gemma_maggiore(input,gemma);
             }
         break;
         }
         case common:{
             gemma.durability_common -= decremento;
             if (gemma.durability_common <= 0) {
-                disponibilita_gemma_maggiore(gemma);
+                disponibilita_gemma_maggiore(input,gemma);
             }
         break;
         }
         default:{
-            disponibilita_gemma_maggiore(gemma);
+            disponibilita_gemma_maggiore(input,gemma);
         }
     }
 }
 //controlla quale gemme diamante si sta usando e da essa decrementa le altre 2 gemme
-void decrementoGemme(Gemma &diamante,Gemma&cerchio,Gemma&cuore){
+void decrementoGemme(PINPUT input[4],Gemma &diamante,Gemma&cerchio,Gemma&cuore){
     //switch per verificare quale rango di tipo diamante stia usando
     switch (controlloQualeGemmaStoUsando(diamante))
     {        
         case fabled:{
             --diamante.durability_fabled;
-            ridimensionaGemme(cuore,10);
-            ridimensionaGemme(cerchio,10);
+            ridimensionaGemme(input,cuore,10);
+            ridimensionaGemme(input,cerchio,10);
             break;
         }
         case legendary:{
             --diamante.durability_legendary;
-            ridimensionaGemme(cuore,8);
-            ridimensionaGemme(cerchio,8);
+            ridimensionaGemme(input,cuore,8);
+            ridimensionaGemme(input,cerchio,8);
             break;
         }
         case mythical:{
             --diamante.durability_mythical;
-            ridimensionaGemme(cuore,7);
-            ridimensionaGemme(cerchio,7);
+            ridimensionaGemme(input,cuore,7);
+            ridimensionaGemme(input,cerchio,7);
             break;
         }
         case epic:{
             --diamante.durability_epic;
-            ridimensionaGemme(cuore,6);
-            ridimensionaGemme(cerchio,6);
+            ridimensionaGemme(input,cuore,6);
+            ridimensionaGemme(input,cerchio,6);
             break;
         }
         case rare:{
             --diamante.durability_rare;
-            ridimensionaGemme(cuore,5);
-            ridimensionaGemme(cerchio,5);
+            ridimensionaGemme(input,cuore,5);
+            ridimensionaGemme(input,cerchio,5);
             break;
         }
         case uncommon:{
             --diamante.durability_uncommon;
-            ridimensionaGemme(cuore,4);
-            ridimensionaGemme(cerchio,4);
+            ridimensionaGemme(input,cuore,4);
+            ridimensionaGemme(input,cerchio,4);
             break;
         }
         case common:{
             --diamante.durability_common;
-            ridimensionaGemme(cuore,2);
-            ridimensionaGemme(cerchio,2);
+            ridimensionaGemme(input,cuore,2);
+            ridimensionaGemme(input,cerchio,2);
             break;
         }
         default:{
-            disponibilita_gemma_maggiore(diamante);
+            disponibilita_gemma_maggiore(input,diamante);
             break;
         }
     }
@@ -240,8 +234,8 @@ void aggiornamentoDurability(Gemma &gemma){
     if(gemma.common<=0) gemma.durability_common=0;
 }
 //funzione per utilizzare le gemme
-void usaGemme(Gemma gemma){
-    disponibilita_gemma_maggiore(gemma);
+void usaGemme(PINPUT input[4],Gemma gemma){
+    disponibilita_gemma_maggiore(input,gemma);
 }
 //assegna l'id di ogni rango dato un n iniziale messo in id lui inizia a contare per tutti i ranghi aumentando di 1 ogni volta
 void assegnazioneid(Gemma &gemma,int id){
@@ -295,6 +289,21 @@ void aggiornaGemmeAllInizio(Gemma &gemme){
     }
 }
 int main() {
+    PINPUT input[4];
+    for(size_t i=0;i<5;++i){
+        input[i]=new INPUT();
+    }
+    input[0]->type = input[1]->type = input[2]->type = input[3]->type = INPUT_KEYBOARD;
+    input[0]->ki.wVk =0;
+    input[1]->ki.wVk = 0;
+    input[2]->ki.wVk = VK_RETURN;
+    input[3]->ki.wVk = VK_RETURN;
+    input[2]->ki.dwFlags = 0;    
+    input[0]->ki.dwFlags = KEYEVENTF_UNICODE;
+    input[3]->ki.dwFlags = KEYEVENTF_KEYUP;
+    input[1]->ki.dwFlags = KEYEVENTF_KEYUP;
+    input[2]->ki.wScan = MapVirtualKey(VK_RETURN,0);
+    input[3]->ki.wScan = MapVirtualKey(VK_RETURN,0);
     //imposta il seed in base al tempo in modo che siano numeri casuali
     srand(time(0));
 
@@ -350,6 +359,7 @@ int main() {
     //variabile per il conteggio
     int conteggio=0;
     bool antiRipetizione=true,vai=true;
+
     while(true){
         if(GetAsyncKeyState(0x53)!=0&&antiRipetizione){
             antiRipetizione=false;
@@ -361,13 +371,13 @@ int main() {
         if(vai){
             ritardo(3);
             //scrittura di owob
-            simulaTastiera("owob");
+            simulaTastiera(input,"owob");
             //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
             ritardo(NumeriCasuali(16,8));
             //incremento per il conteggio
             ++conteggio;
             //scrittura di owoh
-            simulaTastiera("owoh");
+            simulaTastiera(input,"owoh");
             //funzione che serve per decrementare il valore della durability dell gemme
     //        decrementoGemme(diamante,cerchio,cuore);
             //ritarda il prossimo comando per un ritardo casuale tra 16 e gli 8 secondi
@@ -384,5 +394,6 @@ int main() {
             ritardo(1);
         }
     }
+    delete [] input;
     return 0;
 }
